@@ -1,0 +1,204 @@
+/* ==========================================================================
+   1. БАЗОВЫЕ НАСТРОЙКИ СТРАНИЦЫ И ФОНА
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Настройка заднего фона (картинка с лицом) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    z-index: -1;
+    background-image: url('kiti.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.85; /* Картинка яркая и сочная */
+}
+
+
+/* ==========================================================================
+   2. ВЕРХНЯЯ БЕЛАЯ ПОЛОСКА (НАВБАР)
+   ========================================================================== */
+.top-navbar {
+    position: fixed; /* Фиксирует полоску вверху экрана */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff; /* Белая подложка шапки */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Мягкая тень под полоской */
+    z-index: 10000; /* Поверх всех элементов сайта */
+    display: flex;
+    align-items: center;
+}
+
+/* Контейнер для выравнивания содержимого шапки */
+.navbar-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Разносит ТГ-ссылку влево, кнопку вправо */
+    align-items: center;
+}
+
+/* Ссылка на Телеграм (Максаныч але) со стопроцентным сбросом синевы и рамок */
+.tg-link {
+    color: #0088cc !important; /* Настоящий голубой цвет Telegram */
+    text-decoration: none !important; /* Жестко УБИРАЕТ синее подчеркивание */
+    outline: none !important; /* Убирает черную рамку вокруг ссылки */
+    border: none !important; /* Отключает любые внешние рамки */
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: none !important; /* Никаких теней на белом фоне */
+    display: inline-block;
+}
+
+.tg-link:hover {
+    color: #00a2ed !important; /* Слегка подсвечивается при наведении */
+    text-decoration: none !important; /* Подчеркивание не появляется */
+}
+
+/* Центральный заголовок в белой полоске */
+.navbar-center-title {
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #222222 !important;
+    text-shadow: none !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); /* Идеальное центрирование */
+}
+
+/* Маленькая кнопка «Заказать суету» на белой полоске */
+.navbar-btn {
+    background: linear-gradient(45deg, #ff0055, #9b5de5);
+    color: white !important;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 0, 85, 0.2);
+    font-family: sans-serif;
+    transition: 0.2s;
+}
+
+.navbar-btn:hover {
+    transform: scale(1.05); /* Кнопка слегка увеличивается */
+}
+
+
+/* ==========================================================================
+   3. ТЕКСТОВЫЕ БЛОКИ (ЭФФЕКТ МАТОВОГО СТЕКЛА)
+   ========================================================================== */
+.content-box {
+    background-color: rgba(255, 255, 255, 0.15); /* Легкий белый налет */
+    backdrop-filter: blur(10px); /* Стильное размытие заднего фона под текстом */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    max-width: 750px;
+    margin: 40px auto; /* Центрирует и разделяет карточки */
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+/* Стили заголовков и текстов внутри карточек */
+.content-box h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.content-box p, .content-box li {
+    font-size: 19px; /* Крупный читаемый шрифт */
+    line-height: 1.6;
+    margin: 12px 0;
+    text-align: left; /* Чтение слева направо внутри карточки */
+}
+
+/* Белые буквы с мощной двойной тенью для контраста на любом фоне */
+h2, h3, p, li {
+    color: #ffffff !important;
+    text-shadow: 1px 1px 4px #000000, 2px 2px 2px rgba(0,0,0,0.8); 
+}
+
+
+/* ==========================================================================
+   4. ТАБЛИЦА С ПРАЙС-ЛИСТОМ
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background-color: #9b5de5;
+    color: white !important;
+    padding: 10px;
+    text-align: left;
+    text-shadow: none !important;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+/* ==========================================================================
+   5. РАМКА С ФОТОРОБОТОМ (ПОЛАРОИД)
+   ========================================================================== */
+.photo-frame {
+    background: white;
+    padding: 15px 15px 25px 15px;
+    border-radius: 10px;
+    max-width: 350px;
+    margin: 40px auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.photo-frame img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Подпись под фото в белой рамке */
+.photo-caption {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333 !important; /* Темный текст на белом фоне */
+    text-shadow: none !important; /* Убираем черную тень */
+    margin-top: 15px;
+}
+.vk-link {
+    color: #0077ff !important; /* Синий цвет ВК */
+    text-decoration: none !important; /* Без подчеркиваний */
+    outline: none !important; /* Без черных рамок */
+    border: none !important; 
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow: none !important; 
+    display: inline-block;
+}
+.vk-link:hover {
+    color: #2b8cff !important;
+}
