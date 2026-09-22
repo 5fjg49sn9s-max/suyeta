@@ -6,12 +6,13 @@ function otkrytOkno() {
     const token = "8891678864:AAFqJybYeBU7m_PMYlWQ2-QRRO1B49gFaY0"; 
     const chatId = "1307920580"; 
     
-    const text = "🚨 МАКСАНЫЧ, АЛЕ!\n\nПоступил новый заказ на суету! Ледяная полторашка Evervess уже ждет на столе. Подрывайся, время пошло! 🥤⚡";
+    // Пишем угарный текст одной сплошной строкой БЕЗ знаков \n
+    const text = "🚨 МАКСАНЫЧ, АЛЕ! Поступил новый заказ на суету! Ледяная полторашка Evervess уже ждет на столе. Подрывайся, время пошло! 🥤⚡";
 
     // 3. ТВОЕ ЛИЧНОЕ ЗЕРКАЛО CLOUDFLARE
     const proxyUrl = "https://workers.dev" + token + "/sendMessage";
 
-    // Отправляем правильный POST-запрос с данными, чтобы Cloudflare и Telegram его пропустили
+    // Отправляем чистый POST-запрос с данными
     fetch(proxyUrl, {
         method: "POST",
         headers: {
@@ -24,9 +25,9 @@ function otkrytOkno() {
     })
     .then(response => {
         if (response.ok) {
-            console.log("Сообщение успешно пробило блокировки РФ и улетело в Телеграм!");
+            console.log("Сообщение успешно долетело до Телеграма!");
         } else {
-            console.log("Ошибка! Сервер ответил со статусом: " + response.status);
+            console.log("Телеграм отклонил запрос. Статус: " + response.status);
         }
     })
     .catch(error => console.error("Ошибка сети:", error));
@@ -35,3 +36,4 @@ function otkrytOkno() {
 function zakrytOkno() {
     document.getElementById('secretModal').style.display = 'none';
 }
+
