@@ -1,3 +1,7 @@
+function zakrytOkno() {
+    document.getElementById('secretModal').style.display = 'none';
+}
+
 function otkrytOkno() {
     // 1. Открываем красивое окно с колой на самом сайте
     document.getElementById('secretModal').style.display = 'flex';
@@ -6,34 +10,20 @@ function otkrytOkno() {
     const token = "8891678864:AAFqJybYeBU7m_PMYlWQ2-QRRO1B49gFaY0"; 
     const chatId = "1307920580"; 
     
-    // Пишем угарный текст одной сплошной строкой БЕЗ знаков \n
+    // Текст сплошным куском без опасных переносов строк
     const text = "🚨 МАКСАНЫЧ, АЛЕ! Поступил новый заказ на суету! Ледяная полторашка Evervess уже ждет на столе. Подрывайся, время пошло! 🥤⚡";
 
-    // 3. ТВОЕ ЛИЧНОЕ ЗЕРКАЛО CLOUDFLARE
-    const proxyUrl = "https://workers.dev" + token + "/sendMessage";
+    // 3. Собираем прямую ссылку через твое личное зеркало Cloudflare
+    const proxyUrl = "https://workers.dev" + token + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(text);
 
-    // Отправляем чистый POST-запрос с данными
-    fetch(proxyUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: text
-        })
-    })
-    .then(response => {
-        if (response.ok) {
-            console.log("Сообщение успешно долетело до Телеграма!");
-        } else {
-            console.log("Телеграм отклонил запрос. Статус: " + response.status);
-        }
-    })
-    .catch(error => console.error("Ошибка сети:", error));
+    // БРОНЕБОЙНЫЙ МЕТОД: Создаем невидимую картинку и пихаем туда ссылку.
+    // Браузер думает, что просто качает картинку, и запрос со свистом пролетает в Cloudflare!
+    const pingImg = new Image();
+    pingImg.src = proxyUrl;
+
+    console.log("Запрос отправлен через скрытый пинг!");
 }
 
 function zakrytOkno() {
     document.getElementById('secretModal').style.display = 'none';
 }
-
