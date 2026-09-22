@@ -8,22 +8,30 @@ function otkrytOkno() {
     
     const text = "🚨 МАКСАНЫЧ, АЛЕ!\n\nПоступил новый заказ на суету! Ледяная полторашка Evervess уже ждет на столе. Подрывайся, время пошло! 🥤⚡";
 
-    // 3. ТВОЕ ЛИЧНОЕ ЗЕРКАЛО CLOUDFLARE (исправленное и состыкованное)
-    const proxyUrl = "https://workers.dev" + token + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(text);
+    // 3. ТВОЕ ЛИЧНОЕ ЗЕРКАЛО CLOUDFLARE
+    const proxyUrl = "https://workers.dev" + token + "/sendMessage";
 
-    // Отправляем фоновый запрос через Cloudflare на сервера Телеграма
-    fetch(proxyUrl)
-        .then(response => {
-            if (response.ok) {
-                console.log("Сообщение успешно пробило блокировки РФ и улетело в Телеграм!");
-            } else {
-                console.log("Ошибка! Проверь код или статус воркера.");
-            }
+    // Отправляем правильный POST-запрос с данными, чтобы Cloudflare и Telegram его пропустили
+    fetch(proxyUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: text
         })
-        .catch(error => console.error("Ошибка сети:", error));
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Сообщение успешно пробило блокировки РФ и улетело в Телеграм!");
+        } else {
+            console.log("Ошибка! Сервер ответил со статусом: " + response.status);
+        }
+    })
+    .catch(error => console.error("Ошибка сети:", error));
 }
 
 function zakrytOkno() {
     document.getElementById('secretModal').style.display = 'none';
 }
-
